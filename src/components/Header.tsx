@@ -1,3 +1,4 @@
+
 import { Layers, Moon, Sun, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/useTheme";
@@ -5,6 +6,7 @@ import { SavedDesignsPanel } from "./SavedDesignsPanel";
 import { SavedDesign } from "@/hooks/useSavedDesigns";
 import { InfographicData } from "@/types/infographic";
 import { useAuth } from "@/components/auth/AuthProvider";
+import { useSubscription } from "@/hooks/useSubscription";
 import { AuthDialog } from "@/components/auth/AuthDialog";
 import { PricingDialog } from "@/components/payment/PricingDialog";
 import { useTranslation } from "react-i18next";
@@ -12,6 +14,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -41,6 +44,8 @@ export function Header({
   const { t } = useTranslation();
   const { theme, toggleTheme } = useTheme();
   const { user, signOut } = useAuth();
+  const { isPro, isAdmin } = useSubscription();
+  const navigate = useNavigate();
 
   return (
     <header className="h-14 border-b border-border bg-card flex items-center justify-between px-6">
@@ -74,7 +79,7 @@ export function Header({
                 <Avatar className="h-8 w-8">
                   <AvatarImage src={user.user_metadata?.avatar_url} alt={user.email || ""} />
                   <AvatarFallback className="bg-primary/10 text-primary">
-                    {user.email?.charAt(0).toUpperCase() || <User className="w-4 h-4" />}
+                    {user.email?.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
               </Button>
@@ -82,12 +87,29 @@ export function Header({
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">{t('header.account')}</p>
+                  <p className="text-sm font-medium leading-none">{user.email}</p>
                   <p className="text-xs leading-none text-muted-foreground">
-                    {user.email}
+                    {isAdmin ? "Admin" : isPro ? "Pro Plan" : "Free Plan"}
                   </p>
                 </div>
               </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                {isAdmin && (
+                  <DropdownMenuItem onClick={() => navigate("/admin/users")}>
+                    <Users className="mr-2 h-4 w-4" />
+                    <span>Admin Dashboard</span>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem>
+                  <User className="mr-2 h-4 w-4" />
+                  <span>{t('header.account')}</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Layout className="mr-2 h-4 w-4" />
+                  <span>{t('header.savedDesigns')}</span>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => signOut()} className="text-destructive focus:text-destructive cursor-pointer">
                 <LogOut className="mr-2 h-4 w-4" />
