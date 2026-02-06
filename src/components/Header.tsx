@@ -1,5 +1,5 @@
 
-import { Layers, Moon, Sun, User, LogOut, Users, Layout } from "lucide-react";
+import { Layers, Moon, Sun, User, LogOut, Users, LayoutGrid } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/useTheme";
@@ -107,7 +107,7 @@ export function Header({
                   <span>{t('header.account')}</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Layout className="mr-2 h-4 w-4" />
+                  <LayoutGrid className="mr-2 h-4 w-4" />
                   <span>{t('header.savedDesigns')}</span>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
