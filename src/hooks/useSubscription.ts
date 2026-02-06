@@ -7,12 +7,14 @@ import { toast } from "sonner";
 export function useSubscription() {
     const { user } = useAuth();
     const [isPro, setIsPro] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         async function checkSubscription() {
             if (!user) {
                 setIsPro(false);
+                setIsAdmin(false);
                 setIsLoading(false);
                 return;
             }
@@ -20,18 +22,22 @@ export function useSubscription() {
             try {
                 const { data, error } = await supabase
                     .from("profiles")
-                    .select("subscription_status, subscription_tier")
+                    .select("subscription_status, subscription_tier, role")
                     .eq("id", user.id)
                     .single();
 
                 if (error) {
                     console.error("Error fetching subscription:", error);
                     setIsPro(false);
+                    setIsAdmin(false);
                 } else {
-                    // Lemon Squeezy status: 'active', 'on_trial', etc.
+                    const adminRole = data.role === "admin";
+                    setIsAdmin(adminRole);
+                    // Pro if active subscription OR admin
                     setIsPro(
                         data.subscription_status === "active" ||
-                        data.subscription_tier === "pro"
+                        data.subscription_tier === "pro" ||
+                        adminRole
                     );
                 }
             } catch (error) {
@@ -66,5 +72,5 @@ export function useSubscription() {
         window.location.href = url.toString();
     };
 
-    return { isPro, isLoading, initiateCheckout };
+    return { isPro, isAdmin, isLoading, initiateCheckout };
 }

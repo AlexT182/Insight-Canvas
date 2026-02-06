@@ -4,6 +4,7 @@
         "savedDesigns": "Saved Designs",
         "upgradeToPro": "Upgrade to Pro",
         "logout": "Logout",
+        "account": "Account",
         "slogan": "Clean · Clear · Modern"
     },
     "hero": {
@@ -48,6 +49,8 @@
         "template": "Template",
         "content": "Content",
         "style": "Style",
+        "branding": "Branding",
+        "avatar": "Avatar",
         "export": "Export",
         "title": "Title",
         "subtitle": "Subtitle",

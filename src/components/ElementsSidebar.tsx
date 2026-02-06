@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { AvatarBuilder } from "./AvatarBuilder";
 import { ColorAccessibilityPanel } from "./ColorAccessibilityPanel";
+import { FontSettings } from "./FontSettings";
 import { Plus } from "lucide-react";
 import { useSubscription } from "@/hooks/useSubscription";
 import { PricingDialog } from "@/components/payment/PricingDialog";
@@ -275,14 +276,20 @@ export function ElementsSidebar({ data, onChange }: ElementsSidebarProps) {
 
       case "style":
         return (
-          <div className="p-4 space-y-4">
+          <div className="p-4 space-y-6">
             <div className="space-y-1.5">
               <Label className="text-xs font-medium">{t('sidebar.themeColor')}</Label>
-              {/* Theme color selection UI would go here */}
+              <ColorAccessibilityPanel
+                accentColor={data.themeColor}
+                onAccentColorChange={(color) => updateField("themeColor", color)}
+              />
             </div>
             <div className="space-y-1.5">
               <Label className="text-xs font-medium">{t('sidebar.fontPairing')}</Label>
-              {/* Font pairing selection UI would go here */}
+              <FontSettings
+                data={data}
+                onChange={onChange}
+              />
             </div>
           </div>
         );

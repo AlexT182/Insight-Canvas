@@ -1,11 +1,13 @@
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Check, Crown } from "lucide-react";
+import { Check, Crown, Pencil, Save, X } from "lucide-react";
 import { useSubscription } from "@/hooks/useSubscription";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useAppConfig } from "@/hooks/useAppConfig";
+import { Input } from "@/components/ui/input";
 
 interface PricingDialogProps {
     trigger?: React.ReactNode;
@@ -13,14 +15,31 @@ interface PricingDialogProps {
 
 export function PricingDialog({ trigger }: PricingDialogProps) {
     const { t } = useTranslation();
-    const { initiateCheckout, isPro } = useSubscription();
+    const { initiateCheckout, isPro, isAdmin } = useSubscription();
+    const { config, updateConfig, loading: configLoading } = useAppConfig();
     const [loading, setLoading] = useState(false);
+
+    // Admin Edit State
+    const [isEditingPrice, setIsEditingPrice] = useState(false);
+    const [editPriceValue, setEditPriceValue] = useState("");
+
+    const proPrice = config["pro_monthly_price"] || "4.9";
+
+    useEffect(() => {
+        setEditPriceValue(proPrice);
+    }, [proPrice]);
 
     const handleUpgrade = async () => {
         setLoading(true);
-        // Replace with your actual Stripe Price ID
-        await initiateCheckout("price_1234567890");
+        // Replace with your actual Lemon Squeezy Checkout URL
+        // In a real app, you might want to fetch this from config too if it changes
+        await initiateCheckout("https://insidecanvas.lemonsqueezy.com/checkout/buy/03102370-1317-4581-807d-53696773322d");
         setLoading(false);
+    };
+
+    const handleSavePrice = async () => {
+        await updateConfig("pro_monthly_price", editPriceValue);
+        setIsEditingPrice(false);
     };
 
     return (
@@ -73,10 +92,43 @@ export function PricingDialog({ trigger }: PricingDialogProps) {
                             </div>
                             <p className="text-sm text-muted-foreground">{t('pricing.proDesc')}</p>
                         </div>
-                        <div className="mb-6">
-                            <span className="text-3xl font-bold">$4.9</span>
-                            <span className="text-muted-foreground">{t('pricing.month')}</span>
+
+                        <div className="mb-6 flex items-center gap-2">
+                            {isEditingPrice ? (
+                                <div className="flex items-center gap-2">
+                                    <span className="text-3xl font-bold">$</span>
+                                    <Input
+                                        value={editPriceValue}
+                                        onChange={(e) => setEditPriceValue(e.target.value)}
+                                        className="w-24 h-10 text-xl font-bold"
+                                        autoFocus
+                                    />
+                                    <Button size="icon" variant="ghost" onClick={handleSavePrice}>
+                                        <Save className="w-4 h-4 text-green-600" />
+                                    </Button>
+                                    <Button size="icon" variant="ghost" onClick={() => setIsEditingPrice(false)}>
+                                        <X className="w-4 h-4 text-red-500" />
+                                    </Button>
+                                </div>
+                            ) : (
+                                <>
+                                    <span className="text-3xl font-bold">${proPrice}</span>
+                                    <span className="text-muted-foreground">{t('pricing.month')}</span>
+                                    {isAdmin && (
+                                        <Button
+                                            size="icon"
+                                            variant="ghost"
+                                            className="h-6 w-6 ml-2 opacity-50 hover:opacity-100"
+                                            onClick={() => setIsEditingPrice(true)}
+                                            title="Edit Price (Admin)"
+                                        >
+                                            <Pencil className="w-3.5 h-3.5" />
+                                        </Button>
+                                    )}
+                                </>
+                            )}
                         </div>
+
                         <ul className="space-y-3 flex-1 mb-6">
                             <li className="flex items-start gap-2 text-sm">
                                 <Check className="w-4 h-4 text-primary mt-0.5" />
@@ -95,14 +147,25 @@ export function PricingDialog({ trigger }: PricingDialogProps) {
                                 <span>{t('pricing.brandKit')}</span>
                             </li>
                         </ul>
-                        <Button
-                            className="w-full mt-auto bg-primary hover:bg-primary/90"
-                            onClick={handleUpgrade}
-                            disabled={isPro || loading}
-                        >
-                            {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                            {isPro ? t('pricing.planActive') : t('pricing.upgradeNow')}
-                        </Button>
+
+                        {isAdmin ? (
+                            <Button
+                                className="w-full mt-auto bg-primary hover:bg-primary/90"
+                                disabled
+                            >
+                                <Crown className="w-4 h-4 mr-2" />
+                                Admin Access (Unlimited)
+                            </Button>
+                        ) : (
+                            <Button
+                                className="w-full mt-auto bg-primary hover:bg-primary/90"
+                                onClick={handleUpgrade}
+                                disabled={isPro || loading}
+                            >
+                                {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                                {isPro ? t('pricing.planActive') : t('pricing.upgradeNow')}
+                            </Button>
+                        )}
                     </div>
                 </div>
             </DialogContent>
