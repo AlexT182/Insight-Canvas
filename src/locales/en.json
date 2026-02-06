@@ -1,0 +1,63 @@
+{
+    "header": {
+        "signIn": "Sign In",
+        "savedDesigns": "Saved Designs",
+        "upgradeToPro": "Upgrade to Pro",
+        "logout": "Logout",
+        "slogan": "Clean · Clear · Modern"
+    },
+    "hero": {
+        "title": "Create stunning infographics in seconds",
+        "subtitle": "Transform your data into beautiful visual stories. No design skills required.",
+        "startCreating": "Start Creating Now",
+        "templates": "Templates",
+        "content": "Content",
+        "style": "Style",
+        "export": "Export"
+    },
+    "auth": {
+        "title": "Welcome Back",
+        "subtitle": "Sign in to save your progress",
+        "email": "Email",
+        "password": "Password",
+        "loading": "Loading...",
+        "login": "Login",
+        "register": "Register",
+        "createAccount": "Create Account",
+        "successMessage": "Check your email for the confirmation link!"
+    },
+    "pricing": {
+        "freeStarter": "Free Starter",
+        "freeDesc": "Perfect for trying out the tool",
+        "proCreator": "Pro Creator",
+        "popular": "Popular",
+        "proDesc": "For power users & marketers",
+        "month": "/month",
+        "basicTemplates": "Basic Templates",
+        "exportPng": "Export to PNG (Standard)",
+        "savedDesignsCount": "3 Saved Designs",
+        "currentPlan": "Current Plan",
+        "allTemplates": "All Premium Templates",
+        "exportPdfHighRes": "Export to PDF & High-Res PNG",
+        "unlimitedSavedDesigns": "Unlimited Saved Designs",
+        "brandKit": "Brand Kit (Logo & Colors)",
+        "upgradeNow": "Upgrade Now",
+        "planActive": "Plan Active"
+    },
+    "sidebar": {
+        "template": "Template",
+        "content": "Content",
+        "style": "Style",
+        "export": "Export",
+        "title": "Title",
+        "subtitle": "Subtitle",
+        "themeColor": "Theme Color",
+        "fontPairing": "Font Pairing",
+        "exportPreview": "Export Preview"
+    },
+    "common": {
+        "locked": "Locked",
+        "proFeature": "This is a Pro feature",
+        "upgradeToUnlock": "Upgrade to unlock"
+    }
+}

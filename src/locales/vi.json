@@ -1,0 +1,64 @@
+{
+    "header": {
+        "signIn": "Đăng nhập",
+        "savedDesigns": "Thiết kế đã lưu",
+        "upgradeToPro": "Nâng cấp Pro",
+        "logout": "Đăng xuất",
+        "account": "Tài khoản",
+        "slogan": "Gọn gàng · Rõ ràng · Hiện đại"
+    },
+    "hero": {
+        "title": "Tạo infographic tuyệt đẹp chỉ trong vài giây",
+        "subtitle": "Biến dữ liệu của bạn thành những câu chuyện hình ảnh sống động. Không cần kỹ năng thiết kế.",
+        "startCreating": "Bắt đầu ngay",
+        "templates": "Mẫu",
+        "content": "Nội dung",
+        "style": "Phong cách",
+        "export": "Xuất file"
+    },
+    "auth": {
+        "title": "Chào mừng trở lại",
+        "subtitle": "Đăng nhập để lưu quá trình làm việc",
+        "email": "Email",
+        "password": "Mật khẩu",
+        "loading": "Đang xử lý...",
+        "login": "Đăng nhập",
+        "register": "Đăng ký",
+        "createAccount": "Tạo tài khoản",
+        "successMessage": "Vui lòng kiểm tra email để xác nhận!"
+    },
+    "pricing": {
+        "freeStarter": "Gói Miễn phí",
+        "freeDesc": "Dể dàng trải nghiệm thử",
+        "proCreator": "Gói Chuyên nghiệp",
+        "popular": "Phổ biến",
+        "proDesc": "Dành cho người thiết kế & marketer",
+        "month": "/tháng",
+        "basicTemplates": "Các mẫu cơ bản",
+        "exportPng": "Xuất ảnh PNG (Thường)",
+        "savedDesignsCount": "Lưu tối đa 3 thiết kế",
+        "currentPlan": "Gói hiện tại",
+        "allTemplates": "Mở khóa toàn bộ mẫu Premium",
+        "exportPdfHighRes": "Xuất PDF & Ảnh chất lượng cao",
+        "unlimitedSavedDesigns": "Lưu thiết kế không giới hạn",
+        "brandKit": "Bộ thương hiệu (Logo & Màu sắc)",
+        "upgradeNow": "Nâng cấp ngay",
+        "planActive": "Đang sử dụng"
+    },
+    "sidebar": {
+        "template": "Mẫu",
+        "content": "Nội dung",
+        "style": "Kiểu dáng",
+        "export": "Xuất",
+        "title": "Tiêu đề",
+        "subtitle": "Phụ đề",
+        "themeColor": "Màu chủ đạo",
+        "fontPairing": "Phông chữ",
+        "exportPreview": "Xem trước & Xuất"
+    },
+    "common": {
+        "locked": "Đã khóa",
+        "proFeature": "Tính năng dành cho gói Pro",
+        "upgradeToUnlock": "Nâng cấp để mở khóa"
+    }
+}
