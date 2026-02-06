@@ -1,5 +1,6 @@
 
 import { Layers, Moon, Sun, User, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/useTheme";
 import { SavedDesignsPanel } from "./SavedDesignsPanel";
